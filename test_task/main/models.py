@@ -1,5 +1,5 @@
 from django.db import models
-from django.db.models import Model, CharField, IntegerField, ImageField, DateTimeField
+from django.db.models import Model, CharField, IntegerField, ImageField, DateTimeField, BinaryField
 
 
 # Create your models here.

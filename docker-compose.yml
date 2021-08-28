@@ -15,3 +15,19 @@ services:
       - RABBITMQ_DEFAULT_PASS=mypass
     ports:
       - "5672:5672"  # We forward this port because it's useful for debugging
+  db:
+    image: postgres:13
+    restart: always
+    networks:
+      - django_network
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=func_database
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+networks:
+  django_network:
+
+volumes:
+  postgres_data:
