@@ -55,3 +55,5 @@ def generate_image(func_string, interval, step):
     picture_png = buffer.getvalue()
     buffer.close()
     return picture_png
+
+
