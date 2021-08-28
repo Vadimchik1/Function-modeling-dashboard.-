@@ -10,7 +10,7 @@ from django.http import HttpResponseRedirect
 def create_date_of_processing(pk):
     func_obj = Function.objects.get(pk=pk)
     func_string = func_obj.formula
-    picture = generate_image(func_string, func_obj.interval, func_obj.step, pk)
+    picture = generate_image(func_string, func_obj.interval, func_obj.step)
 
     img_temp = NamedTemporaryFile(delete=True)
     img_temp.write(picture)
@@ -19,7 +19,7 @@ def create_date_of_processing(pk):
     func_obj.picture.save(f'image/{pk}.png', File(img_temp), save=True)
     func_obj.date_of_processing = datetime.utcnow()
     func_obj.save()
-    HttpResponseRedirect('admin/main/function/')
+
 
 
 

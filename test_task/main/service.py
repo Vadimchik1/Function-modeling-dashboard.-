@@ -43,18 +43,15 @@ def string_to_func(string):
     return func
 
 
-def generate_image(func_string, interval, step, pk):
+def generate_image(func_string, interval, step):
     buffer = BytesIO()
     f = string_to_func(func_string)
     t = np.linspace(-interval, interval, step)
     fig = plt.figure()
     plt.plot(t, f(t))
     plt.xlim(-interval, interval)
-    # picture_path = f'{MEDIA_ROOT}/pictures/{str(pk)}.png'
     fig.savefig(buffer, dpi=500, format='png')
     buffer.seek(0)
     picture_png = buffer.getvalue()
-    image = base64.b64encode(picture_png)
-    image = image.decode('UTF-8')
     buffer.close()
     return picture_png

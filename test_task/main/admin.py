@@ -1,7 +1,10 @@
 from django.contrib import admin
+from django.utils import timezone
 from .models import *
 from .tasks import create_date_of_processing
-
+from datetime import datetime, timedelta
+from django.http import HttpResponseRedirect
+import time
 
 @admin.register(Function)
 class FunctionAdmin(admin.ModelAdmin):
@@ -12,5 +15,7 @@ class FunctionAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
         super().save_model(request, obj, form, change)
         # Вызов celery task
-        create_date_of_processing.delay(pk=obj.pk)
+        create_date_of_processing.apply_async((obj.pk,), eta=timezone.now() + timedelta(seconds=5))
+
+
 
