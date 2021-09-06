@@ -1,11 +1,10 @@
 import re
 import matplotlib
+from PIL import Image, ImageDraw
 
 matplotlib.use("Agg")
 from matplotlib import pyplot as plt
 import numpy as np
-from test_task.settings import MEDIA_ROOT
-import base64
 from io import BytesIO
 
 replacements = {
@@ -57,3 +56,20 @@ def generate_image(func_string, interval, step):
     return picture_png
 
 
+def generate_ex_image(text):
+    buffer = BytesIO()
+
+    fig, ax = plt.subplots()
+
+    box = {'facecolor': 'black',  # цвет области
+             'edgecolor': 'red',  # цвет крайней линии
+             'boxstyle': 'round'}
+    ax.text(0.05, 0.5, text,
+            bbox=box,
+            color='white',  # цвет шрифта
+            fontsize=20)
+    fig.savefig(buffer, dpi=500, format='png')
+    buffer.seek(0)
+    picture_png = buffer.getvalue()
+    buffer.close()
+    return picture_png
