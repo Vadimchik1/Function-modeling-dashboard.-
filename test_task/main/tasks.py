@@ -7,7 +7,7 @@ from django.core.files.temp import NamedTemporaryFile
 
 
 @app.task
-def create_date_of_processing(pk):
+def generate_graph(pk):
     func_obj = Function.objects.get(pk=pk)
     func_string = func_obj.formula
     try:

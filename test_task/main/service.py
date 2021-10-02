@@ -1,6 +1,5 @@
 import re
 import matplotlib
-from PIL import Image, ImageDraw
 
 matplotlib.use("Agg")
 from matplotlib import pyplot as plt
